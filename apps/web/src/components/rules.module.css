@@ -1,0 +1,129 @@
+.finder {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.finder > * {
+  min-width: 0;
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search {
+  flex: 1 1 220px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.search:focus-within {
+  border-color: var(--turquoise);
+  box-shadow: 0 0 0 3px rgba(19, 135, 127, 0.2);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  min-height: 46px;
+  border: 0;
+  outline: none;
+  background: none;
+}
+
+.toggle {
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.toggle:hover {
+  border-color: var(--ink);
+}
+
+.count {
+  font-size: 0.9rem;
+  color: var(--clay);
+}
+
+.list {
+  border-top: 2px solid var(--ink);
+}
+
+.article {
+  border-bottom: 1px solid var(--line);
+}
+
+.article summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 4px;
+  font-weight: 700;
+  font-size: 1.08rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.article summary::-webkit-details-marker {
+  display: none;
+}
+
+.article summary::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 0.45em;
+  border-right: 2px solid var(--maroon);
+  border-bottom: 2px solid var(--maroon);
+  transform: rotate(-45deg);
+  transition: transform 0.2s;
+}
+
+.article[open] summary::before {
+  transform: rotate(45deg);
+}
+
+.article summary span:first-child {
+  flex: 1;
+}
+
+.article summary:hover {
+  color: var(--maroon);
+}
+
+.n {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--clay);
+  font-variant-numeric: tabular-nums;
+}
+
+.article ol {
+  margin: 0 0 20px;
+  padding-left: 2.4em;
+  display: grid;
+  gap: 10px;
+  max-width: 44rem;
+}
+
+.article li::marker {
+  color: var(--clay);
+  font-variant-numeric: tabular-nums;
+}

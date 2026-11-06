@@ -1,0 +1,24 @@
+{
+  "name": "bigsa",
+  "private": true,
+  "description": "Official website of the Bhutan Indigenous Games and Sports Association (BIGSA): public site, admin panel and API.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "npm run dev -w @bigsa/api",
+    "dev:web": "npm run dev -w @bigsa/web",
+    "build": "npm run build -w @bigsa/shared && npm run build -w @bigsa/api && npm run build -w @bigsa/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "db:migrate": "npm run db:migrate -w @bigsa/api --",
+    "db:seed": "npm run db:seed -w @bigsa/api --",
+    "admin:create": "npm run admin:create -w @bigsa/api --",
+    "test": "npm run test -w @bigsa/shared",
+    "postinstall": "npm run build -w @bigsa/shared"
+  }
+}

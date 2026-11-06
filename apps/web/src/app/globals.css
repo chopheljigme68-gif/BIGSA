@@ -1,0 +1,414 @@
+/*
+ * BIGSA design tokens — light, gallery-style layout (white canvas, serif
+ * headlines, pill controls, rounded cards).
+ * Palette is sampled from the BIGSA logo: the saffron map of Bhutan, the
+ * maroon of the hand outlines and gho, the turquoise ring of the Gorthig,
+ * and the clay of the base. Dark bands use lacquer (a maroon-black), never grey.
+ */
+:root {
+  --saffron: #f2b230;
+  --saffron-deep: #c98a12;
+  --maroon: #7a1f1a;
+  --maroon-bright: #9c2a22;
+  --lacquer: #24100d;
+  --turquoise: #13877f;
+  --clay: #5c5043; /* secondary text — 7:1 on white */
+  --bone: #f4f2ee;
+  --mist: #f7f6f3;
+  --paper: #ffffff;
+  --ink: #1f1512;
+  --ink-soft: #3a302a; /* body copy on white — 11:1 */
+  --line: rgba(36, 16, 13, 0.16);
+  --line-strong: rgba(36, 16, 13, 0.36);
+  --on-dark: #f5f0e6;
+  --on-dark-soft: rgba(245, 240, 230, 0.72);
+
+  --font-sans: var(--font-archivo, 'Archivo'), system-ui, sans-serif;
+  --font-serif: var(--font-lora, 'Lora'), Georgia, 'Times New Roman', serif;
+  --font-dz: var(--font-tibetan, 'Noto Serif Tibetan'), 'Jomolhari', serif;
+
+  /* Type scale (1.25, Bringhurst-style). Everything is in rem, and the root size
+     itself grows with the screen (see html below), so text and spacing scale
+     together from phones to 4K displays. */
+  --step--1: 0.875rem;
+  --step-0: 1.125rem;
+  --step-1: 1.35rem;
+  --step-2: 1.7rem;
+  --step-3: clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem);
+  --step-4: clamp(2.4rem, 1.6rem + 3vw, 4rem);
+  --step-5: clamp(2.4rem, 1.6rem + 3.2vw, 4.2rem);
+  --step-hero: clamp(2.6rem, 1.4rem + 4.6vw, 5rem);
+
+  /* Use the whole screen: content runs edge to edge with a fluid gutter, capped
+     only on ultra-wide monitors where lines would become too long to scan. */
+  --gutter: clamp(16px, 3.2vw, 72px);
+  --max: 2240px;
+  --radius: 12px;
+  --pill: 999px;
+  --header-h: 84px;
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 24px);
+  /* Fluid root size: 16px on phones, ~17px at 1440px, ~18px at 1920px, 20px on 4K. */
+  font-size: clamp(100%, 0.78rem + 0.3vw, 125%);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  font-weight: 430;
+  font-stretch: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--turquoise);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--saffron);
+  color: var(--lacquer);
+}
+
+mark {
+  background: color-mix(in srgb, var(--saffron) 55%, transparent);
+  color: inherit;
+  padding: 0 0.1em;
+}
+
+/* Display type: a book serif in sentence case, set tight. */
+.display {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+}
+
+.dz {
+  font-family: var(--font-dz);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--saffron);
+  color: var(--lacquer);
+  font-weight: 700;
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    font-size: 11pt;
+  }
+}
+
+/* =============================================================================
+ * Motion system
+ * - Everything here is decoration on top of a fully readable page: browsers that
+ *   don't support a feature simply show content without the effect.
+ * - All of it is switched off for people who ask their OS for reduced motion
+ *   (see the prefers-reduced-motion block above).
+ * - Only transform/opacity are animated, so it stays smooth on low-end phones.
+ * ============================================================================= */
+
+:root {
+  interpolate-size: allow-keywords; /* lets <details> animate to height:auto (Chromium) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll reveals: pure CSS scroll-driven animations — no JS, no flash of hidden
+   content, nothing to hydrate. Elements already on screen at load are simply visible. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal] {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+    [data-reveal='fade'] {
+      animation-name: reveal-fade;
+    }
+    [data-reveal='scale'] {
+      animation-name: reveal-scale;
+    }
+    [data-reveal='left'] {
+      animation-name: reveal-left;
+    }
+    /* Gentle stagger across rows of cards */
+    [data-reveal]:nth-child(3n + 2) {
+      animation-range: entry 6% entry 62%;
+    }
+    [data-reveal]:nth-child(3n + 3) {
+      animation-range: entry 12% entry 70%;
+    }
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+
+/* Page enter transition (app/(site)/template.tsx re-mounts on every navigation).
+   fill-mode "backwards" so no transform lingers afterwards: a lingering transform
+   would turn this wrapper into the containing block for position:fixed overlays. */
+.page-enter {
+  animation: page-enter 0.55s var(--ease-out) backwards;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* Top route-loading bar */
+.route-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 3px;
+  pointer-events: none;
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--saffron), var(--maroon-bright), var(--turquoise));
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+.route-progress[data-state='loading'] {
+  opacity: 1;
+  animation: route-load 8s var(--ease-out) forwards;
+}
+
+.route-progress[data-state='done'] {
+  opacity: 0;
+  transform: scaleX(1);
+  transition: transform 0.2s ease-out, opacity 0.4s 0.2s ease-out;
+}
+
+@keyframes route-load {
+  from {
+    transform: scaleX(0.04);
+  }
+  to {
+    transform: scaleX(0.9);
+  }
+}
+
+/* Article reading progress — pure CSS, driven by page scroll */
+.reading-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: 3px;
+  background: var(--saffron);
+  transform-origin: left;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .reading-progress {
+    animation: grow-x linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes grow-x {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* 3D tilt + cursor spotlight for [data-tilt] (vars set by MotionEffects) */
+[data-tilt] {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.5s var(--ease-out);
+  will-change: transform;
+}
+
+[data-tilt][data-tilting] {
+  transition: transform 0.08s linear;
+}
+
+[data-tilt]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.28), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+[data-tilt][data-tilting]::after {
+  opacity: 1;
+}
+
+/* Native <details> open/close animation (Chromium 131+; instant elsewhere) */
+details::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition: block-size 0.35s var(--ease-out), content-visibility 0.35s allow-discrete;
+}
+
+details[open]::details-content {
+  block-size: auto;
+}
+
+/* Photo lightbox zoom-from-thumbnail (View Transitions API) */
+::view-transition-group(lightbox-photo) {
+  animation-duration: 0.45s;
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.25s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-tilt] {
+    transform: none !important;
+  }
+  .route-progress,
+  .reading-progress {
+    display: none;
+  }
+}

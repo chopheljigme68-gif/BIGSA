@@ -1,0 +1,93 @@
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: min(720px, 100%);
+  margin-inline: auto;
+  padding: 6px 6px 6px 26px;
+  border-radius: var(--pill);
+  background: var(--bone);
+  border: 2px solid transparent;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.3s, transform 0.35s var(--ease-spring);
+}
+
+.pill:hover {
+  background: #efece6;
+}
+
+.pill:focus-within {
+  transform: scale(1.015);
+  background: var(--paper);
+  border-color: rgba(122, 31, 26, 0.25);
+  box-shadow: 0 0 0 5px rgba(122, 31, 26, 0.08);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  border: 0;
+  background: none;
+  outline: none;
+  font-size: 1.02rem;
+}
+
+.input::placeholder {
+  color: var(--clay);
+}
+
+.scope {
+  appearance: none;
+  height: 44px;
+  padding: 0 34px 0 14px;
+  border: 0;
+  border-radius: var(--pill);
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231f1512' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.scope:hover {
+  background-color: rgba(36, 16, 13, 0.05);
+}
+
+.go {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--maroon);
+  color: var(--paper);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.go:hover {
+  background: var(--maroon-bright);
+  transform: scale(1.06);
+}
+
+.go svg {
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.go:hover svg {
+  transform: rotate(-12deg) scale(1.1);
+}
+
+.go:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 520px) {
+  .scope {
+    display: none;
+  }
+  .pill {
+    padding-left: 20px;
+  }
+}

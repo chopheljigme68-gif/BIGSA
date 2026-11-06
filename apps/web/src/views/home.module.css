@@ -1,0 +1,241 @@
+/* hero: centred serif headline, pill search, popular-search chips */
+.hero {
+  position: relative;
+  /* Fill the first screen (minus the header) and centre the content in it. */
+  min-height: min(calc(100svh - var(--header-h)), 1100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(48px, 7vw, 112px);
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.heroInner {
+  position: relative;
+  width: 100%;
+}
+
+.heroTitle {
+  font-size: var(--step-hero);
+  max-width: 20ch;
+  margin-inline: auto;
+}
+
+/* Headline rises word by word */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+}
+
+.word > span {
+  display: inline-block;
+  animation: word-up 0.9s var(--ease-out) both;
+}
+
+@keyframes word-up {
+  from {
+    transform: translateY(110%) rotate(4deg);
+    opacity: 0;
+  }
+}
+
+/* Floating Gorthig rings (the archery target's painted rings) */
+.ring {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--paper) 0 16%, var(--saffron) 16% 30%, var(--turquoise) 30% 44%, var(--maroon-bright) 44% 58%, transparent 58%);
+  opacity: 0.16;
+  translate: calc(var(--px, 0) * var(--depth) * 1px) calc(var(--py, 0) * var(--depth) * 1px);
+  transition: translate 0.6s var(--ease-out);
+  animation: ring-in 1.2s var(--ease-out) both, float 9s ease-in-out infinite alternate;
+}
+
+.ringA {
+  --depth: 28;
+  width: 260px;
+  aspect-ratio: 1;
+  left: -70px;
+  top: 40px;
+  animation-delay: 0.2s, 0s;
+}
+
+.ringB {
+  --depth: -40;
+  width: 150px;
+  aspect-ratio: 1;
+  right: 6%;
+  top: 18%;
+  opacity: 0.22;
+  animation-delay: 0.35s, -3s;
+}
+
+.ringC {
+  --depth: 18;
+  width: 90px;
+  aspect-ratio: 1;
+  right: 22%;
+  bottom: 8%;
+  opacity: 0.14;
+  animation-delay: 0.5s, -6s;
+}
+
+@keyframes ring-in {
+  from {
+    scale: 0.4;
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-18px) rotate(14deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .ringA {
+    width: 160px;
+    left: -60px;
+  }
+  .ringB {
+    width: 90px;
+  }
+  .ringC {
+    display: none;
+  }
+}
+
+.heroLede {
+  max-width: 38rem;
+  margin: 24px auto 40px;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  animation: up 0.8s 0.08s var(--ease) both;
+}
+
+.popular {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: 28px;
+}
+
+.popular ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.popularLabel {
+  color: var(--clay);
+  font-size: 0.95rem;
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.explore {
+  padding-bottom: clamp(48px, 7vw, 96px);
+}
+
+/* scoring explainer sits in a soft rounded panel */
+.panel {
+  background: var(--mist);
+  border-radius: 28px;
+  padding: clamp(24px, 5vw, 64px);
+}
+
+.noTop {
+  padding-top: 0;
+}
+
+.rangeWrap {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(24px, 5vw, 72px);
+  align-items: center;
+}
+
+.title {
+  font-size: var(--step-3);
+}
+
+.sub {
+  margin-top: 10px;
+  color: var(--ink-soft);
+  max-width: 30rem;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+
+.newsList {
+  margin-top: 12px;
+}
+
+.quiet {
+  color: var(--clay);
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--mist);
+}
+
+.applyCard {
+  margin-top: 28px;
+  padding: 28px;
+  border-radius: 20px;
+  background: var(--bone);
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.applyCard h3 {
+  font-size: 1.6rem;
+}
+
+.applyCard p {
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+
+.galleryBand {
+  padding-bottom: clamp(48px, 7vw, 96px);
+}
+
+@media (max-width: 960px) {
+  .split,
+  .rangeWrap {
+    grid-template-columns: 1fr;
+  }
+}

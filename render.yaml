@@ -1,0 +1,53 @@
+# Render Blueprint for the BIGSA API (Express + Postgres via DATABASE_URL).
+# The website is deployed separately on Vercel (apps/web).
+# Render → New → Blueprint → pick this repo; values marked "sync: false" are asked for once.
+services:
+  - type: web
+    name: bigsa-api
+    runtime: node
+    region: singapore # closest Render region to Bhutan
+    plan: starter # "free" works too, but sleeps after 15 min idle (≈1 min cold start)
+    buildCommand: npm install --include=dev && npm run build -w @bigsa/api
+    startCommand: npm run start -w @bigsa/api
+    healthCheckPath: /health
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - apps/api/**
+        - packages/shared/**
+        - db/**
+        - package.json
+        - package-lock.json
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL # Supabase Session pooler (port 5432)
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: REVALIDATE_SECRET # must be the same value as on Vercel
+        sync: false
+      - key: WEB_URL # the Vercel site, e.g. https://bigsa-web.vercel.app
+        sync: false
+      - key: TRUST_PROXY
+        value: "1"
+      - key: ADMIN_SESSION_HOURS
+        value: "8"
+      - key: UPLOAD_MAX_FILE_MB
+        value: "10"
+      - key: UPLOAD_MAX_ADMIN_FILE_MB
+        value: "25"
+      - key: MAIL_FROM
+        value: BIGSA <no-reply@bigsa.bt>
+      - key: MAIL_NOTIFY
+        value: bigsabt@gmail.com
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false

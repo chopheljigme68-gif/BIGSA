@@ -1,0 +1,108 @@
+.footer {
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.footTop {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px;
+  padding-block: 64px 48px;
+}
+
+.footLogo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.motto {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  margin-top: 20px;
+  max-width: 18ch;
+}
+
+.nameDz {
+  margin-top: 12px;
+  font-size: 1.05rem;
+  color: var(--clay);
+}
+
+.footNav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.footNav a,
+.footContact a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footNav a:hover,
+.footContact a:hover {
+  color: var(--maroon);
+}
+
+.footContact {
+  font-style: normal;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  color: var(--ink-soft);
+}
+
+.social {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.footBottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding-block: 20px 32px;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  color: var(--clay);
+}
+
+.footLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.footLinks a {
+  text-decoration: none;
+}
+
+.footLinks a:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .footTop {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footBrand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .footTop {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,281 @@
+.wrap {
+  display: grid;
+  gap: 28px;
+}
+
+.head {
+  display: grid;
+  gap: 12px;
+  max-width: 40rem;
+}
+
+.title {
+  font-size: var(--step-5);
+}
+
+.lede {
+  font-size: var(--step-1);
+  color: var(--ink-soft);
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab {
+  padding: 10px 16px;
+  border: 0;
+  background: none;
+  font-weight: 700;
+  color: var(--clay);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tab[aria-selected='true'] {
+  color: var(--maroon);
+  border-bottom-color: var(--maroon);
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.1fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: center;
+}
+
+.figure {
+  margin: 0;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  touch-action: manipulation;
+}
+
+.caption {
+  font-size: 0.8rem;
+  color: var(--clay);
+  margin-top: 8px;
+}
+
+.zone {
+  fill: transparent;
+  cursor: pointer;
+  outline: none;
+  transition: fill 0.2s, stroke 0.2s;
+}
+
+.zone:hover,
+.zone:focus-visible {
+  fill: rgba(242, 178, 48, 0.28);
+}
+
+.zone:focus-visible {
+  stroke: var(--turquoise);
+  stroke-width: 3;
+}
+
+/* The board path keeps its paint; hover adds a warm tint instead. */
+path.zone {
+  fill: #fbf8f2;
+}
+
+path.zone:hover,
+path.zone:focus-visible {
+  fill: #fdf0d2;
+}
+
+.zoneActive,
+path.zoneActive {
+  fill: rgba(242, 178, 48, 0.4);
+}
+
+path.zoneActive {
+  fill: #fde7b4;
+}
+
+.zoneOff {
+  fill: transparent;
+  pointer-events: none;
+}
+
+.arrow {
+  animation: land 0.42s var(--ease) both;
+}
+
+.trail {
+  animation: draw 0.6s ease-out both;
+  stroke-dashoffset: 0;
+}
+
+.stone {
+  animation: drop 0.4s var(--ease) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes land {
+  from {
+    /* individual translate composes with the SVG transform attribute */
+    opacity: 0;
+    translate: 90px -70px;
+  }
+  70% {
+    opacity: 1;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+@keyframes draw {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    scale: 1.35;
+  }
+}
+
+.panel {
+  display: grid;
+  gap: 28px;
+}
+
+.readout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: end;
+  column-gap: 14px;
+  animation: swap 0.35s var(--ease);
+}
+
+.points {
+  font-size: clamp(6rem, 14vw, 11rem);
+  color: var(--maroon);
+  line-height: 0.78;
+}
+
+.pointsLabel {
+  font-weight: 700;
+  color: var(--clay);
+  padding-bottom: 0.6em;
+}
+
+.ruleName {
+  grid-column: 1 / -1;
+  margin-top: 16px;
+  font-size: var(--step-2);
+}
+
+.ruleText {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  max-width: 34rem;
+  color: var(--ink-soft);
+}
+
+@keyframes swap {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.ruleList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.ruleBtn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 4px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  text-align: left;
+  font-weight: 600;
+}
+
+.ruleBtn:hover {
+  color: var(--maroon);
+}
+
+.ruleBtn[aria-pressed='true'] {
+  color: var(--maroon);
+  box-shadow: inset 4px 0 0 var(--saffron);
+  padding-left: 14px;
+}
+
+.ruleBtnPts {
+  font-variant-numeric: tabular-nums;
+  color: var(--clay);
+}
+
+@media (max-width: 800px) {
+  .stage {
+    grid-template-columns: 1fr;
+  }
+  .svg {
+    max-height: 420px;
+  }
+}
+
+/* Impact ripple where the arrow lands */
+.ripple {
+  fill: none;
+  stroke: var(--maroon-bright);
+  stroke-width: 2.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ripple 0.7s var(--ease-out) both;
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0.9;
+    scale: 0.3;
+  }
+  100% {
+    opacity: 0;
+    scale: 4;
+  }
+}
+
+/* Points readout springs in */
+.points {
+  display: inline-block;
+  animation: points-pop 0.5s var(--ease-spring) both;
+}
+
+@keyframes points-pop {
+  from {
+    transform: scale(0.5) translateY(20px);
+    opacity: 0;
+  }
+}
+
+.ruleBtn {
+  transition: color 0.2s, padding 0.3s var(--ease-out), box-shadow 0.3s;
+}
+
+.tab {
+  transition: color 0.2s, border-color 0.3s;
+}
